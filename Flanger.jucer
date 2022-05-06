@@ -2,8 +2,7 @@
 
 <JUCERPROJECT id="xQHvlD" name="Flanger" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              pluginCharacteristicsValue="pluginIsMidiEffectPlugin,pluginProducesMidiOut,pluginWantsMidiIn"
-              pluginVST3Category="Delay,Fx,Modulation">
+              pluginVST3Category="Delay,Fx,Modulation" pluginFormats="buildVST3">
   <MAINGROUP id="EAlnPZ" name="Flanger">
     <GROUP id="{1A0F3F00-C885-3565-04B9-50282146B0E9}" name="Source">
       <FILE id="sNIYFt" name="PluginProcessor.cpp" compile="1" resource="0"
