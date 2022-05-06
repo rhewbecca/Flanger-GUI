@@ -86,9 +86,20 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor (FlangerAudioProcessor&
     phaseSwitch.setButtonText("Invert phase");
 
     addAndMakeVisible(phaseSwitch);
+    
+
+    // WetDry Slider
+    // wet = 0, dry = 1
+    wetDrySlider.setRange (0.0, 1.0);
+    wetDrySlider.setTextBoxStyle (juce::Slider::TextBoxRight, false, 100, 20);
+    wetDrySlider.addListener(this);
+    wetDryLabel.setText ("Wet/Dry", juce::dontSendNotification);
+    
+    addAndMakeVisible (wetDrySlider);
+    addAndMakeVisible (wetDryLabel);
 
     // Window size
-    setSize (800, 500);
+    setSize (800, 600);
 }
 
 FlangerAudioProcessorEditor::~FlangerAudioProcessorEditor()
@@ -135,6 +146,9 @@ void FlangerAudioProcessorEditor::resized()
     fbLabel.setBounds(35, 280, 100, 20);
 
     phaseSwitch.setBounds(680, 200, 100, 20);
+
+    wetDrySlider.setBounds(150, 450, 500, 80);
+    wetDryLabel.setBounds(330, 480, 300, 80);
 }
 
 void FlangerAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)

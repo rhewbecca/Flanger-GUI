@@ -48,6 +48,9 @@ private:
     juce::Label interpolSelectorLabel;
 
     juce::ToggleButton phaseSwitch;
+    
+    juce::Slider wetDrySlider;
+    juce::Label wetDryLabel;
 
     void sliderValueChanged(juce::Slider* slider) override;
 
