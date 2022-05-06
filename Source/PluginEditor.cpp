@@ -60,6 +60,33 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor (FlangerAudioProcessor&
     addAndMakeVisible(interpolSelector);
     addAndMakeVisible(interpolSelectorLabel);
 
+    // Delay
+    delaySlider.setRange(5.0, 25.0);
+    delaySlider.setSliderStyle(juce::Slider::Rotary);
+    delaySlider.setTextBoxStyle(juce::Slider::TextBoxAbove, false, 100, 20);
+    delaySlider.addListener(this);
+
+    delayLabel.setText("Delay/Amount", juce::dontSendNotification);
+
+    addAndMakeVisible(delaySlider);
+    addAndMakeVisible(delayLabel);
+
+    // Feedback gain
+    fbSlider.setRange(0.0, 0.99);
+    fbSlider.setSliderStyle(juce::Slider::Rotary);
+    fbSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
+    fbSlider.addListener(this);
+
+    fbLabel.setText("Feedback", juce::dontSendNotification);
+
+    addAndMakeVisible(fbSlider);
+    addAndMakeVisible(fbLabel);
+
+    // Phase switch
+    phaseSwitch.setButtonText("Invert phase");
+
+    addAndMakeVisible(phaseSwitch);
+
     // Window size
     setSize (800, 500);
 }
@@ -73,11 +100,16 @@ void FlangerAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    
+    // Slider colors
     getLookAndFeel().setColour(juce::Slider::thumbColourId, juce::Colours::red);
+    getLookAndFeel().setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::pink);
+
+    // Label colors
+    getLookAndFeel().setColour(juce::Label::textColourId, juce::Colours::pink);
 
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
-    //g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void FlangerAudioProcessorEditor::resized()
@@ -93,12 +125,22 @@ void FlangerAudioProcessorEditor::resized()
     waveSelector.setBounds(350, 300, 100, 20);
     waveSelectorLabel.setBounds(350, 320, 100, 20);
 
-    interpolSelector.setBounds(700, 50, 100, 20);
-    interpolSelectorLabel.setBounds(700, 20, 100, 20);
+    interpolSelector.setBounds(680, 50, 100, 20);
+    interpolSelectorLabel.setBounds(680, 20, 100, 20);
+
+    delaySlider.setBounds(20, 50, 100, 100);
+    delayLabel.setBounds(20, 20, 100, 20);
+
+    fbSlider.setBounds(30, 200, 80, 80);
+    fbLabel.setBounds(35, 280, 100, 20);
+
+    phaseSwitch.setBounds(680, 200, 100, 20);
 }
 
 void FlangerAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
     if (slider == &sweepSlider) { audioProcessor.set_sweep(sweepSlider.getValue()); }
     else if (slider == &speedSlider) { audioProcessor.set_speed(speedSlider.getValue()); }
+    else if (slider == &delaySlider) { audioProcessor.set_delay(delaySlider.getValue()); }
+    else if (slider == &fbSlider) { audioProcessor.set_fb(fbSlider.getValue()); }
 }

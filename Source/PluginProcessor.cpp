@@ -202,3 +202,13 @@ void FlangerAudioProcessor::set_sweep(float val)
 {
 
 }
+
+void FlangerAudioProcessor::set_delay(float val)
+{
+
+}
+
+void FlangerAudioProcessor::set_fb(float val)
+{
+
+}
