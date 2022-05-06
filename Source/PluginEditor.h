@@ -35,11 +35,19 @@ private:
     juce::Slider speedSlider;
     juce::Label speedLabel;
 
+    juce::Slider delaySlider;
+    juce::Label delayLabel;
+
+    juce::Slider fbSlider;
+    juce::Label fbLabel;
+
     juce::ComboBox waveSelector;
     juce::Label waveSelectorLabel;
 
     juce::ComboBox interpolSelector;
     juce::Label interpolSelectorLabel;
+
+    juce::ToggleButton phaseSwitch;
 
     void sliderValueChanged(juce::Slider* slider) override;
 

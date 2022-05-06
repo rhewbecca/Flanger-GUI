@@ -57,6 +57,8 @@ public:
     // Setters from interface:
     void set_speed(float val);
     void set_sweep(float val);
+    void set_delay(float val);
+    void set_fb(float val);
 
 private:
     //==============================================================================
