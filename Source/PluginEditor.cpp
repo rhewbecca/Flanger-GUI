@@ -153,8 +153,8 @@ void FlangerAudioProcessorEditor::resized()
 
 void FlangerAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
-    if (slider == &sweepSlider) { audioProcessor.set_sweep(sweepSlider.getValue()); }
-    else if (slider == &speedSlider) { audioProcessor.set_speed(speedSlider.getValue()); }
-    else if (slider == &delaySlider) { audioProcessor.set_delay(delaySlider.getValue()); }
-    else if (slider == &fbSlider) { audioProcessor.set_fb(fbSlider.getValue()); }
+    if (slider == &sweepSlider) { audioProcessor.setParameter(1, sweepSlider.getValue()); }
+    else if (slider == &speedSlider) { audioProcessor.setParameter(4, speedSlider.getValue()); }
+    else if (slider == &delaySlider) { audioProcessor.setParameter(0, delaySlider.getValue()); }
+    else if (slider == &fbSlider) { audioProcessor.setParameter(3, fbSlider.getValue()); }
 }
