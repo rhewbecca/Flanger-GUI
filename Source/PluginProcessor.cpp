@@ -35,11 +35,7 @@ FlangerAudioProcessor::FlangerAudioProcessor()
     speedDefault = 0.2;
     waveDefault = kSineWave;
     interpolDefault = kLinear;
-    stereo = 0;
-
-
-    wave = 0;
-    interpol = 0;
+    stereo = 0
 
 }
 
@@ -227,6 +223,9 @@ void FlangerAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock
 
     lfoPhase = 0.0;
     inverseSampleRate = 1.0 / 44100.0;
+    
+    wave = 0;
+    interpol = 0;
 }
 
 void FlangerAudioProcessor::releaseResources()

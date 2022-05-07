@@ -75,8 +75,8 @@ private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FlangerAudioProcessor)
 
-        // Variables for the delay circular buffer: length, actual circular buffer, read and write pointers
-        int delayBufferLength;
+    // Variables for the delay circular buffer: length, actual circular buffer, read and write pointers
+    int delayBufferLength;
     juce::AudioSampleBuffer delayBuffer;
     int delayBufferRead;
     int delayBufferWrite;
