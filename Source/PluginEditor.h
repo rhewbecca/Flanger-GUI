@@ -14,14 +14,14 @@
 //==============================================================================
 /**
 */
-class FlangerAudioProcessorEditor  : public juce::AudioProcessorEditor, private juce::Slider::Listener
+class FlangerAudioProcessorEditor : public juce::AudioProcessorEditor, private juce::Slider::Listener
 {
 public:
-    FlangerAudioProcessorEditor (FlangerAudioProcessor&);
+    FlangerAudioProcessorEditor(FlangerAudioProcessor&);
     ~FlangerAudioProcessorEditor() override;
 
     //==============================================================================
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics&) override;
     void resized() override;
 
 private:
@@ -48,11 +48,11 @@ private:
     juce::Label interpolSelectorLabel;
 
     juce::ToggleButton phaseSwitch;
-    
+
     juce::Slider wetDrySlider;
     juce::Label wetDryLabel;
 
     void sliderValueChanged(juce::Slider* slider) override;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FlangerAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FlangerAudioProcessorEditor)
 };

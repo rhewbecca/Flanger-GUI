@@ -12,14 +12,14 @@
 //==============================================================================
 FlangerAudioProcessor::FlangerAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
-    : AudioProcessor(BusesProperties()
-#if ! JucePlugin_IsMidiEffect
-#if ! JucePlugin_IsSynth
-        .withInput("Input", juce::AudioChannelSet::stereo(), true)
-#endif
-        .withOutput("Output", juce::AudioChannelSet::stereo(), true)
-#endif
-    )
+     : AudioProcessor (BusesProperties()
+                     #if ! JucePlugin_IsMidiEffect
+                      #if ! JucePlugin_IsSynth
+                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
+                      #endif
+                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
+                     #endif
+                       )
 #endif
 {
     // Read and Write pointers initialized
@@ -28,8 +28,7 @@ FlangerAudioProcessor::FlangerAudioProcessor()
 
     // Default values
     delayDefault = 0.0025;
-    dryDefault = 1.0;
-    wetDefault = 0.5;
+    wetDefault = 1;
     fbDefault = 0.0;
     sweepDefault = 0.010;
     gDefault = 1.0;
@@ -37,6 +36,10 @@ FlangerAudioProcessor::FlangerAudioProcessor()
     waveDefault = kSineWave;
     interpolDefault = kLinear;
     stereo = 0;
+
+
+    wave = 0;
+    interpol = 0;
 
 }
 
@@ -63,8 +66,7 @@ float FlangerAudioProcessor::getParameter(int index)
     case kDelayParam: return delay;
     case kSweepParam: return sweep;
     case kDepthParam: return g;
-    case kDryParam: return dry; //?
-    case kWetParam: return wet; //?
+    case kWetParam: return wet;
     case kWaveParam: return wave;
     case kInterpolParam: return interpol;
     case kFbParam: return fb;
@@ -102,6 +104,8 @@ void FlangerAudioProcessor::setParameter(int index, float newValue) {
     case kStereoParam:
         stereo = (int)newValue;
         break;
+    case kWetParam:
+        wet = (int)newValue;
     default:
         break;
     }
@@ -119,6 +123,7 @@ const juce::String FlangerAudioProcessor::getParameterName(int index) {
     case kWaveParam: return "waveform";
     case kInterpolParam: return "interpolation";
     case kStereoParam: return "stereo";
+    case kWetParam: return "wet";
     default: break;
     }
 
@@ -258,7 +263,29 @@ bool FlangerAudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) c
 
 // LFO DA IMPLEMENTARE
 float FlangerAudioProcessor::lfo(int ph, int waveform) {
-    return 0;
+    switch (waveform)
+    {
+    case kTrWave:
+        if (ph < 0.25f)
+            return 0.5f + 2.0f * ph;
+        else if (ph < 0.75f)
+            return 1.0f - 2.0f * (ph - 0.25f);
+        else
+            return 2.0f * (ph - 0.75f);
+    case kSqWave:
+        if (ph < 0.5f)
+            return 1.0f;
+        else
+            return 0.0f;
+    case kSawWave:
+        if (ph < 0.5f)
+            return 0.5f + ph;
+        else
+            return ph - 0.5f;
+    case kSineWave:
+    default:
+        return 0.5f + 0.5f * sinf(2.0 * 3.14 * ph);
+    }
 }
 
 void FlangerAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
@@ -387,7 +414,7 @@ void FlangerAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce:
             // included in what gets stored in the buffer, otherwise it's just a simple delay line
             // of the input signal.
 
-            delayData[dpw] = in + (interpolatedSample * fbDefault);
+            delayData[dpw] = in + (interpolatedSample * fb);
 
             // Increment the write pointer at a constant rate. The read pointer will move at different
             // rates depending on the settings of the LFO, the delay and the sweep width.
@@ -451,7 +478,3 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new FlangerAudioProcessor();
 }
-
-
-
-

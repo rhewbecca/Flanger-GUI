@@ -28,8 +28,6 @@ public:
     bool isBusesLayoutSupported(const BusesLayout& layouts) const override;
 #endif
 
-    // LFO function
-    float FlangerAudioProcessor::lfo(int ph, int waveform);
     void processBlock(juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
 
     //==============================================================================
@@ -46,19 +44,6 @@ public:
     bool isMidiEffect() const override;
     double getTailLengthSeconds() const override;
 
-    // Declaration of function 
-    float getParameter(int index);
-    void setParameter(int index, float newValue);
-    const juce::String getParameterName(int index);
-    const juce::String getParameterText(int index);
-    const juce::String getInputChannelName(int channelIndex) const;
-    const juce::String getOutputChannelName(int channelIndex) const;
-    bool isInputChannelStereoPair(int index) const;
-    bool isOutputChannelStereoPair(int index) const;
-
-    //bool silenceInProducesSilenceOut() const;
-    //double getTailLengthSeconds() const;
-
     //==============================================================================
     int getNumPrograms() override;
     int getCurrentProgram() override;
@@ -70,10 +55,28 @@ public:
     void getStateInformation(juce::MemoryBlock& destData) override;
     void setStateInformation(const void* data, int sizeInBytes) override;
 
+    // LFO function
+    float FlangerAudioProcessor::lfo(int ph, int waveform);
+
+    // Declaration of function 
+    float getParameter(int index);
+    void setParameter(int index, float newValue);
+    const juce::String getParameterName(int index);
+    const juce::String getParameterText(int index);
+    const juce::String getInputChannelName(int channelIndex) const;
+    const juce::String getOutputChannelName(int channelIndex) const;
+    bool isInputChannelStereoPair(int index) const;
+    bool isOutputChannelStereoPair(int index) const;
+
+    //bool silenceInProducesSilenceOut() const;
+
 
 private:
-    // Variables for the delay circular buffer: length, actual circular buffer, read and write pointers
-    int delayBufferLength;
+    //==============================================================================
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FlangerAudioProcessor)
+
+        // Variables for the delay circular buffer: length, actual circular buffer, read and write pointers
+        int delayBufferLength;
     juce::AudioSampleBuffer delayBuffer;
     int delayBufferRead;
     int delayBufferWrite;
@@ -84,8 +87,7 @@ private:
         kDelayParam = 0,
         kSweepParam,
         kDepthParam,
-        kWetParam, //?
-        kDryParam, //?
+        kWetParam,
         kWaveParam,
         kInterpolParam,
         kFbParam,
@@ -111,7 +113,6 @@ private:
 
     // Starting default parameters
     float delayDefault;
-    float dryDefault;
     float wetDefault;
     float fbDefault;
     float sweepDefault;
@@ -125,7 +126,6 @@ private:
 
     // Variables for the flanger parameters
     float delay;
-    float dry;
     float wet;
     float fb;
     float sweep;
@@ -136,8 +136,4 @@ private:
     int interpol;
     int wave;
     int stereo;
-
-
-    //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FlangerAudioProcessor)
 };
