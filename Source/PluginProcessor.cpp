@@ -35,7 +35,7 @@ FlangerAudioProcessor::FlangerAudioProcessor()
     speedDefault = 0.2;
     waveDefault = kSineWave;
     interpolDefault = kLinear;
-    stereo = 0
+    stereo = 0;
 
 }
 
