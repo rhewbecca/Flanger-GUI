@@ -43,9 +43,10 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor (FlangerAudioProcessor&
     
 
     // LFO wave form selector
-    waveSelector.addItem("Sin",1);
-    waveSelector.addItem("Saw",2);
-    waveSelector.addItem("Tri",3);
+    waveSelector.addItem("Sine wave",1);
+    waveSelector.addItem("Saw wave",2);
+    waveSelector.addItem("Triangular Wave",3);
+    waveSelector.addItem("Square Wave", 4);
     //waveSelector.onChange = [this] { waveSelectorChanged(); };
     waveSelector.setSelectedId(1);
 
@@ -56,9 +57,9 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor (FlangerAudioProcessor&
     
 
     // Interpolation selector
-    interpolSelector.addItem("Lin", 1);
-    interpolSelector.addItem("Sqr", 2);
-    interpolSelector.addItem("Cub", 3);
+    interpolSelector.addItem("Linear", 1);
+    interpolSelector.addItem("Square", 2);
+    interpolSelector.addItem("Cubic", 3);
     //interpolSelector.onChange = [this] { interpolSelectorChanged(); };
     interpolSelector.setSelectedId(1);
 
@@ -188,13 +189,13 @@ void FlangerAudioProcessorEditor::resized()
         juce::FlexItem side(200, (float)getHeight(), sideBar);
             juce::FlexBox interpolBox;
             interpolBox.flexDirection = juce::FlexBox::Direction::column;
-            interpolBox.items.add(juce::FlexItem(interpolSelectorLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
-            interpolBox.items.add(juce::FlexItem(interpolSelector).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+            interpolBox.items.add(juce::FlexItem(interpolSelectorLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(0,1));
+            interpolBox.items.add(juce::FlexItem(interpolSelector).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(0,1));
 
             juce::FlexBox waveBox;
             waveBox.flexDirection = juce::FlexBox::Direction::column;
-            waveBox.items.add(juce::FlexItem(waveSelectorLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
-            waveBox.items.add(juce::FlexItem(waveSelector).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+            waveBox.items.add(juce::FlexItem(waveSelectorLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(0,1));
+            waveBox.items.add(juce::FlexItem(waveSelector).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(0,1));
 
         sideBar.items.add(juce::FlexItem(interpolBox).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1,1, 50.0f));                                                 // [4]
         sideBar.items.add(juce::FlexItem(waveBox).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1, 1, 50.0f));
