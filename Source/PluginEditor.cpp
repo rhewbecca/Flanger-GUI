@@ -16,6 +16,7 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor(FlangerAudioProcessor& 
 
     // LFO Sweep (Amplitude)
     sweepSlider.setRange(0.0, 1.0);
+    //sweepSlider.setValue(0.7);
     sweepSlider.setSliderStyle(juce::Slider::Rotary);
     sweepSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
     sweepSlider.addListener(this);
@@ -27,6 +28,7 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor(FlangerAudioProcessor& 
 
     // LFO Speed (Frequency)
     speedSlider.setRange(0.0, 10.0);
+    //speedSlider.setValue(5.0);
     speedSlider.setSliderStyle(juce::Slider::Rotary);
     speedSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
     speedSlider.addListener(this);
@@ -41,7 +43,7 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor(FlangerAudioProcessor& 
     waveSelector.addItem("Tri", 2);
     waveSelector.addItem("Sqr", 3);
     waveSelector.addItem("Saw", 4);
-    waveSelector.onChange = [this] { audioProcessor.setParameter(5, waveSelector.getSelectedId()); };
+    waveSelector.onChange = [this] { audioProcessor.setParameter(5, waveSelector.getSelectedId()-1); };
     waveSelector.setSelectedId(1);
 
     waveSelectorLabel.setText("LFO Type", juce::dontSendNotification);
@@ -53,7 +55,7 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor(FlangerAudioProcessor& 
     interpolSelector.addItem("Lin", 1);
     interpolSelector.addItem("Sqr", 2);
     interpolSelector.addItem("Cub", 3);
-    interpolSelector.onChange = [this] { audioProcessor.setParameter(6, interpolSelector.getSelectedId()); };
+    interpolSelector.onChange = [this] { audioProcessor.setParameter(6, interpolSelector.getSelectedId()-1); };
     interpolSelector.setSelectedId(1);
 
     interpolSelectorLabel.setText("Interpolation", juce::dontSendNotification);
@@ -63,6 +65,7 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor(FlangerAudioProcessor& 
 
     // Delay
     delaySlider.setRange(5.0, 25.0);
+    //delaySlider.setValue(15.0);
     delaySlider.setSliderStyle(juce::Slider::Rotary);
     delaySlider.setTextBoxStyle(juce::Slider::TextBoxAbove, false, 100, 20);
     delaySlider.addListener(this);
@@ -74,6 +77,7 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor(FlangerAudioProcessor& 
 
     // Feedback gain
     fbSlider.setRange(0.0, 0.99);
+    //fbSlider.setValue(0.80);
     fbSlider.setSliderStyle(juce::Slider::Rotary);
     fbSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
     fbSlider.addListener(this);
@@ -92,6 +96,7 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor(FlangerAudioProcessor& 
     // WetDry Slider
     // wet = 0, dry = 1
     wetDrySlider.setRange(0.0, 1.0);
+    //wetDrySlider.setValue(1.0);
     wetDrySlider.setTextBoxStyle(juce::Slider::TextBoxRight, false, 100, 20);
     wetDrySlider.addListener(this);
     wetDryLabel.setText("Wet/Dry", juce::dontSendNotification);
@@ -112,6 +117,9 @@ void FlangerAudioProcessorEditor::paint(juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+
+    g.fillRect(200, 100, 400, 150);
+    g.drawText("This should be an audio visualiser:", 200, 70, 400, 20, juce::Justification::centred, true);
 
     // Slider colors
     getLookAndFeel().setColour(juce::Slider::thumbColourId, juce::Colours::red);

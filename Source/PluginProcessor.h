@@ -111,16 +111,6 @@ private:
         kCubic
     };
 
-    // Starting default parameters
-    float delayDefault;
-    float wetDefault;
-    float fbDefault;
-    float sweepDefault;
-    float gDefault;
-    float speedDefault;
-    Waves waveDefault;
-    Interpol interpolDefault;
-
     float lfoPhase;
     double inverseSampleRate;
 
