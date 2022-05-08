@@ -212,3 +212,8 @@ void FlangerAudioProcessor::set_fb(float val)
 {
 
 }
+
+void FlangerAudioProcessor::set_wetDry(float val)
+{
+
+}

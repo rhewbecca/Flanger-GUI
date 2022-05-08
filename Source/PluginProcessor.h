@@ -59,6 +59,7 @@ public:
     void set_sweep(float val);
     void set_delay(float val);
     void set_fb(float val);
+    void set_wetDry(float val);
 
 private:
     //==============================================================================

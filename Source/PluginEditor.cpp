@@ -21,7 +21,7 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor (FlangerAudioProcessor&
     // LFO Sweep (Amplitude)
     sweepSlider.setRange(0.0, 50.0);
     //sweepSlider.setSliderStyle(juce::Slider::Rotary);
-    sweepSlider.setTextBoxStyle(juce::Slider::TextBoxAbove, false, 100, 20);
+    sweepSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
     sweepSlider.addListener(this);
 
     sweepLabel.setText("Sweep", juce::dontSendNotification);
@@ -99,7 +99,6 @@ FlangerAudioProcessorEditor::FlangerAudioProcessorEditor (FlangerAudioProcessor&
     wetDrySlider.setTextBoxStyle (juce::Slider::TextBoxBelow, false, 100, 20);
     wetDrySlider.addListener(this);
     wetDryLabel.setText ("Wet/Dry", juce::dontSendNotification);
-    
     addAndMakeVisible(wetDryLabel);
     addAndMakeVisible (wetDrySlider);
     
@@ -149,34 +148,39 @@ void FlangerAudioProcessorEditor::resized()
     
             juce::FlexBox sweepBox;
             sweepBox.flexDirection = juce::FlexBox::Direction::column;
-            sweepBox.items.add(juce::FlexItem (sweepSlider).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
             sweepBox.items.add(juce::FlexItem(sweepLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+            sweepBox.items.add(juce::FlexItem (sweepSlider).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+            
 
             juce::FlexBox speedBox;
             speedBox.flexDirection = juce::FlexBox::Direction::column;
-            speedBox.items.add(juce::FlexItem(speedSlider).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
             speedBox.items.add(juce::FlexItem(speedLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+            speedBox.items.add(juce::FlexItem(speedSlider).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+            
 
             juce::FlexBox delayBox;
             delayBox.flexDirection = juce::FlexBox::Direction::column;
-            delayBox.items.add(juce::FlexItem(delaySlider).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
             delayBox.items.add(juce::FlexItem(delayLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+            delayBox.items.add(juce::FlexItem(delaySlider).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+            
 
             juce::FlexBox fbBox;
             fbBox.flexDirection = juce::FlexBox::Direction::column;
-            fbBox.items.add(juce::FlexItem(fbSlider).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
-            fbBox.items.add(juce::FlexItem(fbLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+            fbBox.items.add(juce::FlexItem(fbLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1, 1));
+            fbBox.items.add(juce::FlexItem(fbSlider).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1,1));
+            
 
             juce::FlexBox wetDryBox;
             wetDryBox.flexDirection = juce::FlexBox::Direction::column;
-            wetDryBox.items.add(juce::FlexItem(wetDrySlider).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
-            wetDryBox.items.add(juce::FlexItem(wetDryLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+            wetDryBox.items.add(juce::FlexItem(wetDryLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1, 1));
+            wetDryBox.items.add(juce::FlexItem(wetDrySlider).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1,1));
+            
 
-        knobBox.items.add(juce::FlexItem(sweepBox).withFlex(2.5));                                                 // [4]
-        knobBox.items.add(juce::FlexItem(speedBox).withFlex(2.5));
-        knobBox.items.add(juce::FlexItem(delayBox).withFlex(2.5));
-        knobBox.items.add(juce::FlexItem(fbBox).withFlex(2.5));
-        knobBox.items.add(juce::FlexItem(wetDryBox).withFlex(2.5));
+        knobBox.items.add(juce::FlexItem(sweepBox).withFlex(2, 1));                                                 // [4]
+        knobBox.items.add(juce::FlexItem(speedBox).withFlex(2, 1));
+        knobBox.items.add(juce::FlexItem(delayBox).withFlex(2, 1));
+        knobBox.items.add(juce::FlexItem(fbBox).withFlex(2, 1));
+        knobBox.items.add(juce::FlexItem(wetDryBox).withFlex(3, 0));
         knobBox.performLayout(getLocalBounds().toFloat());
 
         juce::FlexBox sideBar;
@@ -192,12 +196,12 @@ void FlangerAudioProcessorEditor::resized()
             waveBox.items.add(juce::FlexItem(waveSelectorLabel).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
             waveBox.items.add(juce::FlexItem(waveSelector).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
 
-        sideBar.items.add(juce::FlexItem(interpolBox).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));                                                 // [4]
-        sideBar.items.add(juce::FlexItem(waveBox).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
-        sideBar.items.add(juce::FlexItem(phaseSwitch).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+        sideBar.items.add(juce::FlexItem(interpolBox).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1,1, 50.0f));                                                 // [4]
+        sideBar.items.add(juce::FlexItem(waveBox).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1, 1, 50.0f));
+        sideBar.items.add(juce::FlexItem(phaseSwitch).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1, 1, 50.0f));
 
-    externalFlex.items.add(juce::FlexItem(knobBox).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
-    externalFlex.items.add(juce::FlexItem(side).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(1));
+    externalFlex.items.add(juce::FlexItem(knobBox).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(2, 1));
+    externalFlex.items.add(juce::FlexItem(side).withFlex(2.5).withMinHeight(50.0f).withMinWidth(50.0f).withFlex(0,1,150.0f));
     externalFlex.performLayout(getLocalBounds().toFloat());
 }
 
@@ -207,4 +211,5 @@ void FlangerAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
     else if (slider == &speedSlider) { audioProcessor.set_speed(speedSlider.getValue()); }
     else if (slider == &delaySlider) { audioProcessor.set_delay(delaySlider.getValue()); }
     else if (slider == &fbSlider) { audioProcessor.set_fb(fbSlider.getValue()); }
+    else if (slider == &wetDrySlider) { audioProcessor.set_wetDry(wetDrySlider.getValue()); }
 }
