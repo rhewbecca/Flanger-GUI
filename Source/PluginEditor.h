@@ -41,6 +41,9 @@ private:
     juce::Slider fbSlider;
     juce::Label fbLabel;
 
+    juce::Slider phaseKnob;
+    juce::Label phaseLabel;
+
     juce::ComboBox waveSelector;
     juce::Label waveSelectorLabel;
 
@@ -52,7 +55,12 @@ private:
     juce::Slider wetDrySlider;
     juce::Label wetDryLabel;
 
+    juce::Label diagnosticLabel;
+
+    void setDiagnosticLabel(float f);
+
     void sliderValueChanged(juce::Slider* slider) override;
+    //void FlangerAudioProcessorEditor::selectorChanged(juce::ComboBox* selector) override;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FlangerAudioProcessorEditor)
 };
