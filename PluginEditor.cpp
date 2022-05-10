@@ -165,5 +165,5 @@ void FlangerAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
     if (slider == &sweepSlider) { audioProcessor.setParameter(1, sweepSlider.getValue()); }
     else if (slider == &speedSlider) { audioProcessor.setParameter(4, speedSlider.getValue()); }
     else if (slider == &delaySlider) { audioProcessor.setParameter(0, delaySlider.getValue()); }
-    else if (slider == &fbSlider) { audioProcessor.setParameter(3, fbSlider.getValue()); }
+    else if (slider == &fbSlider) { audioProcessor.setParameter(3, fbSlider.getValue()); }  
 }

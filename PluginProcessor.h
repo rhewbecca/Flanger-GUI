@@ -67,20 +67,7 @@ public:
     const juce::String getOutputChannelName(int channelIndex) const;
     bool isInputChannelStereoPair(int index) const;
     bool isOutputChannelStereoPair(int index) const;
-
-    //bool silenceInProducesSilenceOut() const;
-
-
-private:
-    //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FlangerAudioProcessor)
-
-    // Variables for the delay circular buffer: length, actual circular buffer, read and write pointers
-    int delayBufferLength;
-    juce::AudioSampleBuffer delayBuffer;
-    int delayBufferRead;
-    int delayBufferWrite;
-
+    
     static const float kMaximumDelay;
     static const float kMaximumSweepWidth;
 
@@ -114,8 +101,6 @@ private:
         kCubic
     };
 
-    float lfoPhase;
-    double inverseSampleRate;
 
     // Variables for the flanger parameters
     float delay;
@@ -129,4 +114,17 @@ private:
     int interpol;
     int wave;
     int stereo;
+
+private:
+    // Variables for the delay circular buffer: length, actual circular buffer, read and write pointers
+    int delayBufferLength;
+    juce::AudioSampleBuffer delayBuffer;
+    int delayBufferRead;
+    int delayBufferWrite;
+    
+    float lfoPhase;
+    double inverseSampleRate;
+
+    //==============================================================================
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FlangerAudioProcessor)
 };
